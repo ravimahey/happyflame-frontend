@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-outfit: 'Outfit', system-ui, sans-serif;
+  --font-instrument: 'Instrument Serif', Georgia, serif;
+  --font-syne: 'Syne', system-ui, sans-serif;
+  --font-jakarta: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  --color-amber-50: #FFFBEB;
+  --color-amber-100: #FEF3C7;
+  --color-amber-500: #F59E0B;
+  --color-amber-600: #D97706;
+  --color-amber-700: #B45309;
+}
+
+/* Dynamic Font Themes for Headings */
+body.font-heading-outfit {
+  --font-serif: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-sans);
+}
+body.font-heading-instrument {
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  font-family: var(--font-sans);
+}
+body.font-heading-jakarta {
+  --font-serif: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-sans);
+}
+body.font-heading-syne {
+  --font-serif: 'Syne', system-ui, sans-serif;
+  font-family: var(--font-sans);
+}
+
+@keyframes flame-flicker {
+  0%, 100% {
+    transform: scale(1) rotate(-1deg);
+    opacity: 0.95;
+    filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.75));
+  }
+  25% {
+    transform: scale(1.04, 0.96) rotate(1.5deg);
+    opacity: 0.9;
+    filter: drop-shadow(0 0 20px rgba(217, 119, 6, 0.85));
+  }
+  50% {
+    transform: scale(0.97, 1.05) rotate(-0.5deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 25px rgba(251, 191, 36, 0.9));
+  }
+  75% {
+    transform: scale(1.02, 0.98) rotate(1deg);
+    opacity: 0.92;
+    filter: drop-shadow(0 0 18px rgba(245, 158, 11, 0.8));
+  }
+}
+
+@keyframes soft-pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.06);
+  }
+}
+
+.animate-flame {
+  animation: flame-flicker 3s infinite ease-in-out;
+}
+
+.animate-glow {
+  animation: soft-pulse 5s infinite ease-in-out;
+}
+
+/* Modern thin lines and glassmorphic card styling */
+.thin-border {
+  border: 1px solid rgba(228, 228, 231, 0.8);
+}
+
+.subtle-gradient-bg {
+  background: radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.08) 0%, rgba(255, 255, 255, 0) 70%),
+              linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(228, 228, 231, 0.8);
+}
+
+/* Custom crisp modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FAFAFA;
+}
+::-webkit-scrollbar-thumb {
+  background: #E4E4E7;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D4D4D8;
+}
