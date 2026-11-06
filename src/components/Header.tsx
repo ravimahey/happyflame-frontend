@@ -57,7 +57,7 @@ export const Header: React.FC = () => {
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
-                Homepage (/)
+                Homepage
               </button>
               <button
                 onClick={() => navigate('/landing')}
@@ -67,7 +67,7 @@ export const Header: React.FC = () => {
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
-                <span>Ad Landing (/landing)</span>
+                <span>Ad Landing</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
               </button>
             </div>
@@ -196,7 +196,7 @@ export const Header: React.FC = () => {
           <div className="lg:hidden bg-white border-b border-zinc-200 px-6 py-6 shadow-xl animate-in slide-in-from-top duration-200">
             <div className="flex flex-col space-y-4 text-sm font-semibold text-zinc-800">
               <div className="bg-zinc-50 p-3 rounded-xl border border-zinc-200 mb-2 flex items-center justify-between">
-                <span className="text-xs text-zinc-500 font-bold uppercase">Route URL:</span>
+                <span className="text-xs text-zinc-500 font-bold uppercase">Page View:</span>
                 <div className="flex space-x-2">
                   <button
                     onClick={() => {
@@ -207,7 +207,7 @@ export const Header: React.FC = () => {
                       !isLanding ? 'bg-amber-500 text-white' : 'bg-white text-zinc-700 border border-zinc-200'
                     }`}
                   >
-                    /
+                    Homepage
                   </button>
                   <button
                     onClick={() => {
@@ -218,7 +218,7 @@ export const Header: React.FC = () => {
                       isLanding ? 'bg-amber-500 text-white' : 'bg-white text-zinc-700 border border-zinc-200'
                     }`}
                   >
-                    /landing
+                    Ad Landing
                   </button>
                 </div>
               </div>
@@ -231,7 +231,7 @@ export const Header: React.FC = () => {
                 }}
                 className="text-left py-2 border-b border-zinc-100"
               >
-                Homepage (/)
+                Homepage
               </button>
               <button
                 onClick={() => handleNavAnchor('#collections')}
@@ -264,7 +264,7 @@ export const Header: React.FC = () => {
                 }}
                 className="w-full text-center py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl font-bold shadow-sm"
               >
-                🔥 Go to Ad Campaign Page (/landing)
+                🔥 Go to Ad Landing Page
               </button>
             </div>
           </div>

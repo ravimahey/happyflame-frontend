@@ -17,7 +17,7 @@ export const AppContent: React.FC = () => {
   const isLanding = location.pathname.startsWith('/landing') || location.pathname === '/ads';
 
   const [headingFont, setHeadingFont] = useState<'outfit' | 'instrument' | 'jakarta' | 'syne'>('outfit');
-  const [isDockOpen, setIsDockOpen] = useState(false); // Collapsed by default so cards are 100% visible
+  const [isDockOpen, setIsDockOpen] = useState(true); // Open by default
 
   // Scroll to top on route change
   useEffect(() => {
@@ -51,7 +51,7 @@ export const AppContent: React.FC = () => {
               }`}
             >
               <LayoutTemplate className="w-3.5 h-3.5" />
-              <span>1. Homepage (/)</span>
+              <span>Homepage</span>
             </button>
             <button
               onClick={() => navigate('/landing')}
@@ -62,7 +62,7 @@ export const AppContent: React.FC = () => {
               }`}
             >
               <Megaphone className="w-3.5 h-3.5" />
-              <span>2. Ad Landing (/landing)</span>
+              <span>Ad Landing</span>
             </button>
           </div>
 
