@@ -102,10 +102,10 @@ export const PRODUCTS: Product[] = [
     originalPrice: 60.00,
     rating: 4.97,
     reviewCount: 529,
-    burnTime: '18 - 20 hrs per votive (60 hrs total)',
+    burnTime: '18 - 20 hrs per votive',
     dimensions: '55mm x 65mm glass',
     waxWeight: '320g total',
-    image: 'https://images.unsplash.com/photo-1602874801007-bd458bb1b8b8?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1508746829417-e6f548d8d6ed?auto=format&fit=crop&w=800&q=80',
     badge: 'Popular Gift',
     bestSeller: true,
     description: 'Includes 3 pure organic beeswax votives encased in thick, vintage-inspired fluted glass holders that refract the amber flame into radiant warm prisms across your room.',
@@ -126,11 +126,11 @@ export const PRODUCTS: Product[] = [
     originalPrice: 119.00,
     rating: 4.99,
     reviewCount: 1120,
-    burnTime: '140+ hrs total burn',
+    burnTime: '140+ hrs burn',
     dimensions: 'Curated Gift Box',
     waxWeight: '880g wax',
-    image: 'https://images.unsplash.com/photo-1608181114410-db2bb21cd494?auto=format&fit=crop&w=800&q=80',
-    badge: 'Save 25% | Most Popular',
+    image: 'https://images.unsplash.com/photo-1572726729207-a78d6feb18d7?auto=format&fit=crop&w=800&q=80',
+    badge: 'Save 25%',
     bestSeller: true,
     description: 'Our most celebrated bundle designed for families switching from toxic paraffin candles to clean living. Includes 12x Tea Lights, 1x Textured Honeycomb Pillar, 1x Solid Cast Pillar, and a Solid Brass Wick Trimmer.',
     features: [
@@ -149,10 +149,10 @@ export const PRODUCTS: Product[] = [
     price: 34.00,
     rating: 4.89,
     reviewCount: 198,
-    burnTime: '24 hrs',
+    burnTime: '24 hrs burn',
     dimensions: '90mm diameter x 55mm',
     waxWeight: '220g',
-    image: 'https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80',
     badge: 'Meditation Favorite',
     description: 'Sculpted in the shape of an unfolding lotus flower. Cast using Northern Rivers organic beeswax, perfect for yoga spaces, altars, or intentional wind-down evening routines.',
     features: [
@@ -172,10 +172,10 @@ export const PRODUCTS: Product[] = [
     originalPrice: 128.00,
     rating: 4.99,
     reviewCount: 785,
-    burnTime: '280+ total burn hours',
+    burnTime: '280+ hrs total burn',
     dimensions: 'Bulk Carton',
     waxWeight: '960g pure wax',
-    image: 'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1605651202774-7d573fd3f12d?auto=format&fit=crop&w=800&q=80',
     badge: 'Best Value Refill',
     description: 'For households that light a candle every single evening. Naked cups with zero single-use metal tins. Just drop into your existing glass tea light holders for pure, effortless atmosphere.',
     features: [
@@ -223,7 +223,7 @@ export const BUNDLE_TIERS: BundleTier[] = [
       'FREE Solid Matte Brass Wick Trimmer ($24 value)'
     ],
     bonusGift: 'FREE Brass Wick Trimmer + Free Express Shipping across Australia',
-    image: 'https://images.unsplash.com/photo-1608181114410-db2bb21cd494?auto=format&fit=crop&w=600&q=80'
+    image: 'https://images.unsplash.com/photo-1572726729207-a78d6feb18d7?auto=format&fit=crop&w=600&q=80'
   },
   {
     id: 'bundle-ultimate',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Product } from '../types';
 import { useCart } from '../context/CartContext';
 import { Star, Clock, ShoppingBag, Eye, Sparkles } from 'lucide-react';
@@ -9,34 +9,41 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart, setQuickViewProduct } = useCart();
+  const [imgSrc, setImgSrc] = useState(product.image);
+
+  // Fallback to verified image if network fails
+  const handleImageError = () => {
+    setImgSrc('https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80');
+  };
 
   return (
     <div className="group bg-white rounded-2xl overflow-hidden border border-zinc-200/80 hover:border-amber-500/50 shadow-sm hover:shadow-xl hover:shadow-amber-500/5 transition-all duration-300 flex flex-col justify-between">
       {/* Product Image & Badges */}
       <div className="relative aspect-square overflow-hidden bg-zinc-50 border-b border-zinc-100">
         <img
-          src={product.image}
+          src={imgSrc}
           alt={product.name}
+          onError={handleImageError}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           loading="lazy"
         />
 
-        {/* Burn Time Floating Badge (Glass style) */}
-        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-zinc-900 border border-zinc-200/70 text-[11px] font-semibold px-2.5 py-1 rounded-full flex items-center space-x-1.5 shadow-sm">
-          <Clock className="w-3 h-3 text-amber-500" />
-          <span>{product.burnTime.split('(')[0]}</span>
-        </div>
-
-        {/* Gradient Highlight Badge */}
+        {/* Top-Right Highlight Marketing Badge */}
         {product.badge && (
-          <div className="absolute top-3 right-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm flex items-center space-x-1">
-            <Sparkles className="w-3 h-3" />
-            <span>{product.badge}</span>
+          <div className="absolute top-3 right-3 z-10 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-md flex items-center space-x-1 max-w-[140px] truncate">
+            <Sparkles className="w-3 h-3 shrink-0" />
+            <span className="truncate">{product.badge}</span>
           </div>
         )}
 
+        {/* Bottom-Left Burn Time Floating Pill (Frosted Glass - separated diagonally from badge) */}
+        <div className="absolute bottom-3 left-3 z-10 bg-zinc-950/80 backdrop-blur-md text-white border border-white/20 text-[10px] font-semibold px-2.5 py-1 rounded-full flex items-center space-x-1.5 shadow-sm">
+          <Clock className="w-3 h-3 text-amber-400 shrink-0" />
+          <span>{product.burnTime.split('(')[0].trim()}</span>
+        </div>
+
         {/* Quick View Hover Action */}
-        <div className="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+        <div className="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4 z-20">
           <button
             onClick={() => setQuickViewProduct(product)}
             className="bg-white text-zinc-900 hover:bg-zinc-50 text-xs font-bold py-2 px-4 rounded-full shadow-lg border border-zinc-200 flex items-center space-x-1.5 transform translate-y-2 group-hover:translate-y-0 transition-all duration-200"
@@ -62,11 +69,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
 
           {/* Title */}
-          <h3 className="font-serif text-lg font-bold text-zinc-900 group-hover:text-amber-600 transition-colors leading-snug">
+          <h3 className="font-serif text-base font-bold text-zinc-900 group-hover:text-amber-600 transition-colors leading-snug line-clamp-1">
             {product.name}
           </h3>
 
-          <p className="text-xs text-zinc-500 mt-1 line-clamp-2">
+          <p className="text-xs text-zinc-500 mt-1 line-clamp-2 min-h-[32px]">
             {product.subtitle}
           </p>
         </div>

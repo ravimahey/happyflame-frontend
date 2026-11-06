@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PRODUCTS, COMPARISON_DATA, REVIEWS, FAQS } from '../data/products';
 import { ProductCard } from '../components/ProductCard';
 import { useCart } from '../context/CartContext';
@@ -16,11 +17,8 @@ import {
   Leaf
 } from 'lucide-react';
 
-interface HomePageProps {
-  setCurrentPage: (page: 'home' | 'ads') => void;
-}
-
-export const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
+export const HomePage: React.FC = () => {
+  const navigate = useNavigate();
   const { addToCart } = useCart();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [quizAnswer, setQuizAnswer] = useState<string | null>(null);
@@ -110,7 +108,7 @@ export const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
               </a>
 
               <button
-                onClick={() => setCurrentPage('ads')}
+                onClick={() => navigate('/landing')}
                 className="w-full sm:w-auto px-6 py-4 bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200/90 font-bold text-sm rounded-xl shadow-sm hover:shadow transition-all flex items-center justify-center space-x-2"
               >
                 <Zap className="w-4 h-4 text-amber-500" />
@@ -144,7 +142,7 @@ export const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
               {/* Flame Visual Card */}
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-zinc-950">
                 <img
-                  src="https://images.unsplash.com/photo-1608181114410-db2bb21cd494?auto=format&fit=crop&w=1000&q=85"
+                  src="https://images.unsplash.com/photo-1572726729207-a78d6feb18d7?auto=format&fit=crop&w=1000&q=85"
                   alt="Happy Flame Pure Organic Beeswax Candles"
                   className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
                 />
@@ -637,7 +635,7 @@ export const HomePage: React.FC<HomePageProps> = ({ setCurrentPage }) => {
                 Explore Candle Collections
               </a>
               <button
-                onClick={() => setCurrentPage('ads')}
+                onClick={() => navigate('/landing')}
                 className="px-6 py-3.5 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold text-xs rounded-xl transition-all"
               >
                 View Ad Campaign Kit (Save 25%)

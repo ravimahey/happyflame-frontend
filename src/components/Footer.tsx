@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Flame, ShieldCheck, Heart, Sparkles, Send, Award, CheckCircle } from 'lucide-react';
 
-interface FooterProps {
-  setCurrentPage: (page: 'home' | 'ads') => void;
-}
-
-export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
+export const Footer: React.FC = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -89,28 +87,28 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
             </h4>
             <ul className="space-y-2.5 text-xs text-zinc-400">
               <li>
-                <a href="#collections" className="hover:text-white transition-colors">
+                <a href="/#collections" className="hover:text-white transition-colors">
                   Pure Beeswax Tea Lights
                 </a>
               </li>
               <li>
-                <a href="#collections" className="hover:text-white transition-colors">
+                <a href="/#collections" className="hover:text-white transition-colors">
                   Artisan Honeycomb Pillars
                 </a>
               </li>
               <li>
-                <a href="#collections" className="hover:text-white transition-colors">
+                <a href="/#collections" className="hover:text-white transition-colors">
                   Traditional Dinner Tapers
                 </a>
               </li>
               <li>
-                <a href="#collections" className="hover:text-white transition-colors">
+                <a href="/#collections" className="hover:text-white transition-colors">
                   Meditation Lotus & Votives
                 </a>
               </li>
               <li>
                 <button
-                  onClick={() => setCurrentPage('ads')}
+                  onClick={() => navigate('/landing')}
                   className="text-amber-400 hover:underline font-bold"
                 >
                   Starter Sanctuary Bundle (Save 25%)
@@ -126,27 +124,27 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
             </h4>
             <ul className="space-y-2.5 text-xs text-zinc-400">
               <li>
-                <a href="#negative-ions" className="hover:text-white transition-colors">
+                <a href="/#negative-ions" className="hover:text-white transition-colors">
                   Negative Ion Air Cleansing
                 </a>
               </li>
               <li>
-                <a href="#comparison" className="hover:text-white transition-colors">
+                <a href="/#comparison" className="hover:text-white transition-colors">
                   Beeswax vs Paraffin Science
                 </a>
               </li>
               <li>
-                <a href="#story" className="hover:text-white transition-colors">
+                <a href="/#story" className="hover:text-white transition-colors">
                   Peter's Asthma Family Story
                 </a>
               </li>
               <li>
-                <a href="#quiz" className="hover:text-white transition-colors">
+                <a href="/#quiz" className="hover:text-white transition-colors">
                   Candle Match Quiz
                 </a>
               </li>
               <li>
-                <a href="#faq" className="hover:text-white transition-colors">
+                <a href="/#faq" className="hover:text-white transition-colors">
                   Care & Burning FAQ
                 </a>
               </li>

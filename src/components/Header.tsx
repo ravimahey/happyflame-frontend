@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Flame, ShoppingBag, Search, Menu, X, Sparkles, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { PRODUCTS } from '../data/products';
 
-interface HeaderProps {
-  currentPage: 'home' | 'ads';
-  setCurrentPage: (page: 'home' | 'ads') => void;
-}
+export const Header: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isLanding = location.pathname.startsWith('/landing') || location.pathname === '/ads';
 
-export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
   const { totalItems, setIsCartOpen, setQuickViewProduct } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -21,6 +21,16 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
         p.category.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : [];
+
+  const handleNavAnchor = (hash: string) => {
+    if (isLanding) {
+      navigate(`/${hash}`);
+    } else {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+    setMobileMenuOpen(false);
+  };
 
   return (
     <>
@@ -37,27 +47,27 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
           </div>
 
           <div className="flex items-center space-x-3">
-            {/* View Switcher Pill */}
+            {/* View Switcher Pill with Real URL Paths */}
             <div className="bg-zinc-800/80 p-0.5 rounded-full border border-zinc-700/80 flex items-center">
               <button
-                onClick={() => setCurrentPage('home')}
+                onClick={() => navigate('/')}
                 className={`px-3 py-0.5 rounded-full text-[11px] font-semibold transition-all ${
-                  currentPage === 'home'
+                  !isLanding
                     ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-sm'
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
-                Homepage
+                Homepage (/)
               </button>
               <button
-                onClick={() => setCurrentPage('ads')}
+                onClick={() => navigate('/landing')}
                 className={`px-3 py-0.5 rounded-full text-[11px] font-semibold flex items-center space-x-1 transition-all ${
-                  currentPage === 'ads'
+                  isLanding
                     ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-sm'
                     : 'text-zinc-400 hover:text-white'
                 }`}
               >
-                <span>Ad Landing Page</span>
+                <span>Ad Landing (/landing)</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
               </button>
             </div>
@@ -71,7 +81,10 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <div
-              onClick={() => setCurrentPage('home')}
+              onClick={() => {
+                navigate('/');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               className="flex items-center space-x-3 cursor-pointer group"
             >
               <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-amber-300 p-0.5 shadow-sm group-hover:shadow-md transition-shadow">
@@ -93,53 +106,49 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
             <nav className="hidden lg:flex items-center space-x-8 text-sm font-semibold text-zinc-600">
               <button
                 onClick={() => {
-                  setCurrentPage('home');
+                  navigate('/');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
                 className={`transition-colors hover:text-zinc-950 ${
-                  currentPage === 'home' ? 'text-zinc-950 font-bold border-b-2 border-amber-500 pb-1' : ''
+                  !isLanding ? 'text-zinc-950 font-bold border-b-2 border-amber-500 pb-1' : ''
                 }`}
               >
                 Home
               </button>
 
-              <a
-                href="#collections"
-                onClick={() => currentPage === 'ads' && setCurrentPage('home')}
+              <button
+                onClick={() => handleNavAnchor('#collections')}
                 className="transition-colors hover:text-zinc-950"
               >
                 Collections
-              </a>
+              </button>
 
-              <a
-                href="#negative-ions"
-                onClick={() => currentPage === 'ads' && setCurrentPage('home')}
+              <button
+                onClick={() => handleNavAnchor('#negative-ions')}
                 className="transition-colors hover:text-zinc-950 flex items-center space-x-1"
               >
                 <Sparkles className="w-3.5 h-3.5 text-amber-500" />
                 <span>Negative Ion Science</span>
-              </a>
+              </button>
 
-              <a
-                href="#story"
-                onClick={() => currentPage === 'ads' && setCurrentPage('home')}
+              <button
+                onClick={() => handleNavAnchor('#story')}
                 className="transition-colors hover:text-zinc-950"
               >
                 Our 2006 Story
-              </a>
+              </button>
 
-              <a
-                href="#comparison"
-                onClick={() => currentPage === 'ads' && setCurrentPage('home')}
+              <button
+                onClick={() => handleNavAnchor('#comparison')}
                 className="transition-colors hover:text-zinc-950"
               >
                 Beeswax vs Paraffin
-              </a>
+              </button>
 
               <button
-                onClick={() => setCurrentPage('ads')}
+                onClick={() => navigate('/landing')}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide transition-all ${
-                  currentPage === 'ads'
+                  isLanding
                     ? 'bg-zinc-950 text-white'
                     : 'bg-gradient-to-r from-amber-500/10 to-orange-500/10 text-amber-700 border border-amber-500/30 hover:border-amber-500/60'
                 }`}
@@ -187,91 +196,75 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) =
           <div className="lg:hidden bg-white border-b border-zinc-200 px-6 py-6 shadow-xl animate-in slide-in-from-top duration-200">
             <div className="flex flex-col space-y-4 text-sm font-semibold text-zinc-800">
               <div className="bg-zinc-50 p-3 rounded-xl border border-zinc-200 mb-2 flex items-center justify-between">
-                <span className="text-xs text-zinc-500 font-bold uppercase">Select Mode:</span>
+                <span className="text-xs text-zinc-500 font-bold uppercase">Route URL:</span>
                 <div className="flex space-x-2">
                   <button
                     onClick={() => {
-                      setCurrentPage('home');
+                      navigate('/');
                       setMobileMenuOpen(false);
                     }}
                     className={`px-3 py-1 rounded-lg text-xs font-bold ${
-                      currentPage === 'home' ? 'bg-amber-500 text-white' : 'bg-white text-zinc-700 border border-zinc-200'
+                      !isLanding ? 'bg-amber-500 text-white' : 'bg-white text-zinc-700 border border-zinc-200'
                     }`}
                   >
-                    Home
+                    /
                   </button>
                   <button
                     onClick={() => {
-                      setCurrentPage('ads');
+                      navigate('/landing');
                       setMobileMenuOpen(false);
                     }}
                     className={`px-3 py-1 rounded-lg text-xs font-bold ${
-                      currentPage === 'ads' ? 'bg-amber-500 text-white' : 'bg-white text-zinc-700 border border-zinc-200'
+                      isLanding ? 'bg-amber-500 text-white' : 'bg-white text-zinc-700 border border-zinc-200'
                     }`}
                   >
-                    Ads Landing
+                    /landing
                   </button>
                 </div>
               </div>
 
               <button
                 onClick={() => {
-                  setCurrentPage('home');
+                  navigate('/');
                   setMobileMenuOpen(false);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
                 className="text-left py-2 border-b border-zinc-100"
               >
-                Home Redesign
+                Homepage (/)
               </button>
-              <a
-                href="#collections"
-                onClick={() => {
-                  if (currentPage === 'ads') setCurrentPage('home');
-                  setMobileMenuOpen(false);
-                }}
-                className="py-2 border-b border-zinc-100"
+              <button
+                onClick={() => handleNavAnchor('#collections')}
+                className="text-left py-2 border-b border-zinc-100"
               >
                 Candle Collections
-              </a>
-              <a
-                href="#negative-ions"
-                onClick={() => {
-                  if (currentPage === 'ads') setCurrentPage('home');
-                  setMobileMenuOpen(false);
-                }}
-                className="py-2 border-b border-zinc-100"
+              </button>
+              <button
+                onClick={() => handleNavAnchor('#negative-ions')}
+                className="text-left py-2 border-b border-zinc-100"
               >
                 Negative Ion Air Cleansing
-              </a>
-              <a
-                href="#story"
-                onClick={() => {
-                  if (currentPage === 'ads') setCurrentPage('home');
-                  setMobileMenuOpen(false);
-                }}
-                className="py-2 border-b border-zinc-100"
+              </button>
+              <button
+                onClick={() => handleNavAnchor('#story')}
+                className="text-left py-2 border-b border-zinc-100"
               >
                 Our Murwillumbah Story
-              </a>
-              <a
-                href="#comparison"
-                onClick={() => {
-                  if (currentPage === 'ads') setCurrentPage('home');
-                  setMobileMenuOpen(false);
-                }}
-                className="py-2 border-b border-zinc-100"
+              </button>
+              <button
+                onClick={() => handleNavAnchor('#comparison')}
+                className="text-left py-2 border-b border-zinc-100"
               >
                 Beeswax vs Paraffin & Soy
-              </a>
+              </button>
               <button
                 onClick={() => {
-                  setCurrentPage('ads');
+                  navigate('/landing');
                   setMobileMenuOpen(false);
                 }}
                 className="w-full text-center py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl font-bold shadow-sm"
               >
-                🔥 View Ad Campaign Offer (Save 25%)
+                🔥 Go to Ad Campaign Page (/landing)
               </button>
             </div>
           </div>
